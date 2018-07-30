@@ -1,24 +1,26 @@
 from tkinter import*
-
 def convert():
-    METER = meterdimension.get()
-    FEET=feetdimension.get()
+    METER = float(meterEntry.get())
+    #print(METER)
+    FEET=float(meterEntry.get())
     if Dimension_bit.get()==1:
-        feet= (int)(METER/0.3048)
-        inch= METER/0.3048
-        inch=(inch-feet)*12
+        #Re= (METER*10/3)
+        #print(Re)
+        feet= int((METER*10/3))
+        inch=METER/0.3
+        feetdimension.set(inch)
+        inch=(inch)*12
         print (feet)
         print(inch)
-        feetdimension.set(feet)
         inchdimension.set(inch)
     elif Dimension_bit.get()==2:
-        feet= (int)(METER*0.3048)
-        inch= METER*0.3048
-        inch=(inch-feet)*100
-        print (feet)
-        print(inch)
-        feetdimension.set(feet)
-        inchdimension.set(inch)
+        meter= (int)(METER*0.3)
+        cm= METER*0.3
+        feetdimension.set(cm)
+        cm=(cm-meter)*100
+        print (meter)
+        print(cm)
+        inchdimension.set(cm)
 
 def reset():
     top = Toplevel(padx=50, pady=50)
@@ -32,7 +34,7 @@ def reset():
     feetdimension.set(int(0))
     meterdimension.set(int(0))
     inchdimension.set(int(0))
-    cmdimension.set(int(0))
+    #cmdimension.set(int(0))
 
 def swapped():
     d=Dimension_bit.get()
@@ -41,7 +43,7 @@ def swapped():
         meterLabel['text']='Enter Feets: '
         tLabel['text']='ft'
         feetLabel['text']='Meter Result:'
-        inchLabel['text']='Remaining in cm result: '
+        inchLabel['text']='Cm Result: '
         feet1Label['text']='m'
         inch1Label['text']='cm'
         Dimension_bit.set(2)
@@ -50,14 +52,14 @@ def swapped():
         meterLabel['text']='Enter Meter: '
         tLabel['text']='m'
         feetLabel['text']='Feet Result:'
-        inchLabel['text']='Remaining in inch result: '
+        inchLabel['text']='Inch Result: '
         feet1Label['text']='ft'
         inch1Label['text']='"'
         Dimension_bit.set(1)
     meterdimension.set(0)
     feetdimension.set(0)
     inchdimension.set(0)
-    cmdimension.set(0)
+    #cmdimension.set(0)
 
 home=Tk()  #figure home
 home.title("Dimension_Converter")
@@ -68,13 +70,13 @@ Dimension_bit=IntVar()
 Dimension_bit.set(1)
 
 meterdimension=IntVar()
-meterdimension.set(0)
+meterdimension.set(1.63)
 feetdimension=IntVar()
-feetdimension.set(0)
+feetdimension.set(0.0)
 inchdimension=IntVar()
-inchdimension.set(0)
-cmdimension=IntVar()
-cmdimension.set(0)
+inchdimension.set(0.0)
+##cmdimension=IntVar()
+##cmdimension.set(0)
 
 titleLabel = Label (meterframe, text = 'Meter to Feet Dimension', font = ("Arial", 20, "bold"), justify = CENTER)
 titleLabel.grid(row = 1, column = 1, columnspan = 3, pady = 10, padx = 20)
@@ -82,7 +84,7 @@ titleLabel.grid(row = 1, column = 1, columnspan = 3, pady = 10, padx = 20)
 meterLabel = Label (meterframe, text = " Enter Meters: ", font = ("Arial", 16), fg = "red")
 meterLabel.grid(row = 2, column = 1, pady = 10, sticky = NW)
 
-meterEntry = Entry (meterframe, width = 15, bd = 5, textvariable = meterdimension)
+meterEntry = Entry (meterframe, width = 13, bd = 5, textvariable = meterdimension)
 meterEntry.grid(row = 3, column = 1, pady = 10, sticky = NW,padx=10)
         
 tLabel = Label (meterframe, text = 'm', font = ("Arial", 15, "bold"), justify = CENTER)
@@ -100,21 +102,23 @@ swapButton.grid(row = 5, column = 1, ipady = 8, ipadx = 12, pady = 5, sticky = N
 feetLabel = Label (meterframe, text = "Feet result: ", font = ("Arial", 16), fg = "blue")
 feetLabel.grid(row = 6, column = 1, pady = 10, sticky = NW)
 
-feetEntry = Entry (meterframe, width = 15, bd = 5, textvariable = feetdimension)
+feetEntry = Entry (meterframe, width = 13, bd = 5, textvariable = feetdimension)
 feetEntry.grid(row = 7, column = 1, pady = 10, sticky = NW, padx = 10 )
 
 feet1Label = Label (meterframe, text = 'ft', font = ("Arial", 15, "bold"), justify = RIGHT)
 feet1Label.grid(row = 7, column = 1)
 
-inchLabel = Label (meterframe, text = "Remaining in inch result: ", font = ("Arial", 16), fg = "blue")
+inchLabel = Label (meterframe, text = "Inch result: ", font = ("Arial", 16), fg = "blue")
 inchLabel.grid(row = 8, column = 1, pady = 10,sticky = NW)
 
-inchEntry = Entry (meterframe, width = 15, bd = 5, textvariable = inchdimension)
+inchEntry = Entry (meterframe, width = 13, bd = 5, textvariable = inchdimension)
 inchEntry.grid(row = 9, column = 1, pady = 10, sticky = NW, padx = 10 )
 
 inch1Label = Label (meterframe, text = '"', font = ("Arial", 15, "bold"), justify = RIGHT)
 inch1Label.grid(row = 9, column = 1)
         
 home.mainloop()
+
+
 
 
